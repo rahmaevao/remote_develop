@@ -21,18 +21,18 @@ if __name__ == '__main__':
 
             if namespace.Label == this_command_group.label:
                 if this_command_group.gui_flag:
-                    header = 'ssh -X ' + USER_AND_ADDRESS + ' -p ' + PORT + ' "' + \
+                    header = 'ssh -X ' + USER_AND_ADDRESS + ' -p ' + PORT + " '" + \
                         'xauth list $DISPLAY > temp_list_of_xauth.txt; ' + \
                         'while IFS= read -r line; do export THIS_AUTH=$line; done < temp_list_of_xauth.txt; ' + \
                         'rm temp_list_of_xauth.txt; ' + \
                         'sudo xauth add $THIS_AUTH; '
                 else:
-                    header = 'ssh ' + USER_AND_ADDRESS + ' -p ' + PORT + ' "'
+                    header = 'ssh ' + USER_AND_ADDRESS + ' -p ' + PORT + " '"
 
                 for this_command in this_command_group.commands:
                     header += this_command + '; '
                 
-                header += '"'
+                header += "'"
                 subprocess.call(header, shell=True)
                 sys.exit(0)
 
