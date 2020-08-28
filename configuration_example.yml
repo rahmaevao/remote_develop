@@ -1,0 +1,20 @@
+# This file configures remote development scripts
+
+SSH port: 2222
+User and address: popov@127.0.1.1
+Name of virtual machine: BolgenOS
+Mount point on host system: /home/popov/АнтивирусПопова
+Path source code directory in remote machine: /home/popov/АнтивирусПопова/sources
+
+Command groups:
+  - Label: Run Антивирус Попова
+    GUI [True/False]: True
+    Commands:
+      - cd АнтивирусПопова
+      - ./АнтивирусПопова
+
+  - Label: Build Антивирус Попова
+    GUI [True/False]: False
+    Commands:
+      - cd АнтивирусПопова
+      - make
