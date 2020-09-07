@@ -54,21 +54,21 @@ if __name__ == '__main__':
             subprocess.call("VBoxManage startvm '" +
                             NAME_VIRTUAL_MACHINE_IMG + "' --type headless", shell=True)
 
-        # Waiting for full load
-        TIMEOUT = 100  # s
-        loaded = False
-        t0 = datetime.datetime.now()
-        while (datetime.datetime.now() - t0).seconds < TIMEOUT:
-            out = subprocess.Popen('ssh-ping -c 1 -p ' + PORT + ' ' + USER_AND_ADDRESS,
-                                   shell=True,
-                                   stdout=subprocess.PIPE).stdout.read().decode('utf-8')
-            if out.find('Pong') != -1:
-                loaded = True
-                break
-        if loaded:
-            print('👍 Machine is loaded')
-        else:
-            print('😠 Machine is not loaded')
+            # Waiting for full load
+            TIMEOUT = 100  # s
+            loaded = False
+            t0 = datetime.datetime.now()
+            while (datetime.datetime.now() - t0).seconds < TIMEOUT:
+                out = subprocess.Popen('ssh-ping -c 1 -p ' + PORT + ' ' + USER_AND_ADDRESS,
+                                    shell=True,
+                                    stdout=subprocess.PIPE).stdout.read().decode('utf-8')
+                if out.find('Pong') != -1:
+                    loaded = True
+                    break
+            if loaded:
+                print('👍 Machine is loaded')
+            else:
+                print('😠 Machine is not loaded')
 
         # Mount disk via ssh
         subprocess.call('umount ' + MOUNT_PATH,
